@@ -35,8 +35,10 @@ export const TextEditor = () => {
 
     useEffect(() => {
         if(socket == null && quill == null) return
+        
         socket.once('load-document', document => {
-            quill.setContents(document);
+            console.log(document)
+            quill.setContents(document.data);
             quill.enable();
         })
 
