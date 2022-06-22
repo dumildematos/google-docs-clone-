@@ -33,8 +33,22 @@ app.delete('/document/:id', async (req, res) => {
       res.status(500).json({ error: error})
   }
 
-})
+});
 
+app.post('/document', async (req, res) => {
+  const { id , data } = req.body;
+  const doc = { 
+    _id: id,
+    data: JSON.parse(data)
+  };
+  try{
+    await Document.create(doc);
+    res.status(201).json({message: 'success'})
+  }catch(error) {
+    res.status(500).json({error: error})
+  }
+
+})
 
 
 mongoose.connect("mongodb://127.0.0.1:27017/google-docs-clone", {
